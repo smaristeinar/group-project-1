@@ -6,6 +6,10 @@ renderStartPage();
 let navbar = document.getElementById("navbar");
 let boxWrapper = document.getElementById("box-wrapper");
 
+navbar.addEventListener("click", (e) => {
+    renderCountryPage(e.target.id);
+});
+
 let place = class{
     constructor(id,stadname,countryid,population){
         this.id = id;
@@ -34,7 +38,7 @@ function countryList(country) {
     land = country;
     let renderCountries = "<ul>"
     for(i in land) {
-        renderCountries += `<li>${land[i].countryname}</li>`;
+        renderCountries += `<li id="${land[i].id}">${land[i].countryname}</li>`;
     }
     renderCountries += "</ul>";
     navbar.insertAdjacentHTML("afterbegin", renderCountries);
@@ -57,3 +61,16 @@ function renderStartPage() {
     `;
     root.insertAdjacentHTML("afterbegin", startPage);
 }
+
+function renderCountryPage(id) {
+    boxWrapper.innerHTML = "";
+    let renderCities = "<ul>";
+    for(city in cities) {
+        if(cities[city].countryid == id) {
+            renderCities += `<li id=${cities[city].id}>${cities[city].stadname}</li>`;
+        }
+    }
+    renderCities += "</ul>";
+    boxWrapper.insertAdjacentHTML("afterbegin", renderCities);
+}
+
