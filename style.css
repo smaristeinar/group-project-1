@@ -1,3 +1,16 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+#root {
+    display: flex;
+}
+
+#box-wrapper {
+    width: 100%;
+}
+
 #navbar {
     background-color: lightgray;
     width: 300px;

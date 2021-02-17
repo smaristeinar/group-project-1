@@ -1,8 +1,10 @@
 let land = {};
 let city = {};
 let cities = [];
-let navbar = document.getElementById("navbar"); 
-
+let root = document.getElementById("root");
+renderStartPage();
+let navbar = document.getElementById("navbar");
+let boxWrapper = document.getElementById("box-wrapper");
 
 let place = class{
     constructor(id,stadname,countryid,population){
@@ -21,7 +23,6 @@ let createPlaces = function(city){
         let citys = city[i];
         let item = new place(citys.id, citys.stadname, citys.countryid, citys.population);
         cities.push(item);
-        
     }
 }
 
@@ -31,7 +32,12 @@ fetch("json/land.json")
 
 function countryList(country) {
     land = country;
-    /*here you can loop throug contry to add to the nav bar*/
+    let renderCountries = "<ul>"
+    for(i in land) {
+        renderCountries += `<li>${land[i].countryname}</li>`;
+    }
+    renderCountries += "</ul>";
+    navbar.insertAdjacentHTML("afterbegin", renderCountries);
 }
 
 fetch("json/stad.json")
@@ -43,5 +49,11 @@ function cityList(city) {
     console.log(cities);
 }
 
- 
-
+function renderStartPage() {
+    let startPage =  
+    `
+    <nav id="navbar"></nav>
+    <main id="box-wrapper"></main>
+    `;
+    root.insertAdjacentHTML("afterbegin", startPage);
+}
