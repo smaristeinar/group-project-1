@@ -3,11 +3,15 @@ let city = {};
 let cities = [];
 let root = document.getElementById("root");
 renderStartPage();
-let navbar = document.getElementById("navbar");
-let boxWrapper = document.getElementById("box-wrapper");
+let countryWrapper = document.getElementById("country-list");
+let cityWrapper = document.getElementById("city-wrapper");
 
-navbar.addEventListener("click", (e) => {
+countryWrapper.addEventListener("click", (e) => {
     renderCountryPage(e.target.id);
+});
+
+cityWrapper.addEventListener("click", (e) => {
+    renderCityPage(e.target.id);
 });
 
 let place = class{
@@ -41,7 +45,7 @@ function countryList(country) {
         renderCountries += `<li id="${land[i].id}">${land[i].countryname}</li>`;
     }
     renderCountries += "</ul>";
-    navbar.insertAdjacentHTML("afterbegin", renderCountries);
+    countryWrapper.insertAdjacentHTML("afterbegin", renderCountries);
 }
 
 fetch("json/stad.json")
@@ -53,17 +57,23 @@ function cityList(city) {
     console.log(cities);
 }
 
+// Rendering Pages
+
 function renderStartPage() {
     let startPage =  
     `
-    <nav id="navbar"></nav>
-    <main id="box-wrapper"></main>
+    <nav id="navbar">
+        <section id="country-list"></section>
+    </nav>
+    <main id="box-wrapper">
+        <section id="city-wrapper"></section>
+    </main>
     `;
     root.insertAdjacentHTML("afterbegin", startPage);
 }
 
 function renderCountryPage(id) {
-    boxWrapper.innerHTML = "";
+    cityWrapper.innerHTML = "";
     let renderCities = "<ul>";
     for(city in cities) {
         if(cities[city].countryid == id) {
@@ -71,6 +81,21 @@ function renderCountryPage(id) {
         }
     }
     renderCities += "</ul>";
-    boxWrapper.insertAdjacentHTML("afterbegin", renderCities);
+    cityWrapper.insertAdjacentHTML("afterbegin", renderCities);
 }
 
+function renderCityPage(id) {
+    let renderCityInfo = "<ul>";
+    for(city in cities) {
+        if(cities[city].id == id) {
+            cityWrapper.innerHTML = "";
+            renderCityInfo += 
+            `
+            <h3>${cities[city].stadname}</h3>
+            <li>Population: ${cities[city].population}</li>
+            `;
+        }
+    }
+    renderCityInfo += "</ul>"
+    cityWrapper.insertAdjacentHTML("afterbegin", renderCityInfo);
+}
