@@ -1,6 +1,9 @@
 let land = {};
 let city = {};
 let cities = [];
+let navbar = document.getElementById("navbar"); 
+
+
 let place = class{
     constructor(id,stadname,countryid,population){
         this.id = id;
@@ -41,3 +44,4 @@ function cityList(city) {
 }
 
  
+
