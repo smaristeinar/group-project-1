@@ -73,3 +73,4 @@ function renderCountryPage(id) {
     renderCities += "</ul>";
     boxWrapper.insertAdjacentHTML("afterbegin", renderCities);
 }
+
