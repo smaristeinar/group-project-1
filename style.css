@@ -11,6 +11,10 @@ body {
     width: 100%;
 }
 
+.clickable-list {
+    cursor: pointer;
+}
+
 #navbar {
     background-color: lightgray;
     width: 300px;
