@@ -11,12 +11,57 @@ body {
     width: 100%;
 }
 
-.clickable-list {
-    cursor: pointer;
-}
-
 #navbar {
     background-color: lightgray;
     width: 300px;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.clickable-list {
+    cursor: pointer;
+}
+
+#country-list {
+    display: flex;
+    align-items: flex-end;
+}
+
+#country-list ul {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+#country-list h2 {
+    margin:0 0 40px 0;
+}
+
+#country-list li {
+    list-style: none;
+    position: relative;
+    border: blue solid 2px ;
+    padding: 10px;
+    margin: 0px 0 20px 0;
+    background-color: lightblue;
+}
+
+#country-list li:hover {
+    background-color: rgba(9, 53, 248, 0.349);
+}
+
+#visited-cities {
+    text-align: center;
+    border: solid 2px;
+    border-color: blue;
+    background-color: lightblue;
+    padding: 4px;
+    margin: 0;
+}
+
+#visited-cities:hover {
+    background-color: rgba(9, 53, 248, 0.349);
 }
