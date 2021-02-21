@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+
 body {
     padding: 0px;
     margin: 0px;
+    font-family: 'Roboto', sans-serif;
 }
 
 #root {
@@ -67,4 +70,28 @@ body {
 
 /* messed up a commit so just pushing an extra one lol */
 
+
+.box-wrapper{
+    background-color: #d8d2d2;
+}
+
+#city-wrapper > ul {
+    list-style-type: none;
+    font-size: 40px;
+   
+    
+}
+
+
+#city-wrapper > ul > li {
+    padding: 10px;
+}
+
+#store-city{
+    padding: 10px;
+    margin: 10px;
+    margin-top: 40px;
+    font-size: 20px;
+    background-color: rgba(127, 250, 11, 0.925);
+}
 
