@@ -99,6 +99,7 @@ function renderCountryPage(id) {
     cityWrapper.insertAdjacentHTML("afterbegin", renderCities);
 }
 
+
 function renderCityPage(id) {
     let renderCityInfo = "";
     for(city in cities) {
