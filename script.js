@@ -49,14 +49,17 @@ function cityList(city) {
 
 countryWrapper.addEventListener("click", (e) => {// makes every country clickable and returns the id to renderCountryPage
     renderCountryPage(e.target.id);
+    addClickableList();
 });
 
-cityWrapper.addEventListener("click", (e) => {
-    let cityId = e.target.id;
-    renderCityPage(cityId);
-    let storeCity = document.getElementById("store-city");
-    storeVisitedBtn(storeCity, cityId);
-});
+let addClickableList = function(){
+    document.getElementById("ulid").addEventListener("click", (e) => {
+        let cityId = e.target.id;
+        renderCityPage(cityId);
+        let storeCity = document.getElementById("store-city");
+        storeVisitedBtn(storeCity, cityId);
+    });
+}
 
 visitedCities.addEventListener("click", () => {
     renderVisitedCities();
@@ -86,7 +89,7 @@ function renderStartPage() {
 
 function renderCountryPage(id) {
     cityWrapper.innerHTML = "";
-    let renderCities = "<ul>";
+    let renderCities = `<ul id="ulid">`;
     for(city in cities) {
         if(cities[city].countryid == id) {
             renderCities +=  `<li id="${cities[city].id}" class='clickable-list'>${cities[city].stadname}</li>`;
@@ -126,5 +129,13 @@ function renderVisitedCities() {
         }
     }
     displayVisitedCities += "</ul>";
+
+    displayVisitedCities += "<div id='deleteBtn'>Delete visited cities</div>";
+
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
+
 }
+
+
+
+
