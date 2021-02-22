@@ -14,12 +14,9 @@ let place = class{
         this.countryid = countryid;
         this.population = population;
     }
-    htmlrender(){
-        return `<p id="${this.id}">${this.stadname}</p>`
-    }
 }
 
-let createPlaces = function(city){
+let createPlaces = function(city){//creates a new object with all the stad data and puts them in cities
     for (let i = 0; i < city.length; i++) {
         let citys = city[i];
         let item = new place(citys.id, citys.stadname, citys.countryid, citys.population);
@@ -28,29 +25,29 @@ let createPlaces = function(city){
 }
 
 fetch("json/land.json")
-.then((response) => response.json())
-.then((data) => countryList(data))
+.then((response) => response.json())// takin in the data from land.json and extracting the objects from it
+.then((data) => countryList(data))// then using the date in the countryList below
 
 function countryList(country) {
     land = country;
-    let renderCountries = "<ul><h2>Countries</h2>"
-    for(i in land) {
+    let renderCountries = "<ul><h2>Countries</h2>" // adding a header
+    for(i in land) { // creating htlm for every land 
         renderCountries += `<li id="${land[i].id}" class='clickable-list'>${land[i].countryname}</li>`;
     }
     renderCountries += "</ul>";
-    countryWrapper.insertAdjacentHTML("afterbegin", renderCountries);
+    countryWrapper.insertAdjacentHTML("afterbegin", renderCountries); //inserting it in to the DOM
 }
 
 fetch("json/stad.json")
 .then((response) => response.json())
-.then((data) => cityList(data))
+.then((data) => cityList(data)) //takin in the stad data from stad.json
 
 function cityList(city) {
-    createPlaces(city);
+    createPlaces(city); // creates objects
     console.log(cities);
 }
 
-countryWrapper.addEventListener("click", (e) => {
+countryWrapper.addEventListener("click", (e) => {// makes every country clickable and returns the id to renderCountryPage
     renderCountryPage(e.target.id);
 });
 
