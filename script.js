@@ -129,5 +129,13 @@ function renderVisitedCities() {
         }
     }
     displayVisitedCities += "</ul>";
+
+    displayVisitedCities += "<button id='deleteBtn'>Delete visited cities</button>";
+
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
+
 }
+
+
+
+
