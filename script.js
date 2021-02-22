@@ -52,17 +52,17 @@ countryWrapper.addEventListener("click", (e) => {// makes every country clickabl
     addClickableList();
 });
 
-let addClickableList = function(){
+let addClickableList = function(){// makes the cities clickable
     document.getElementById("ulid").addEventListener("click", (e) => {
         let cityId = e.target.id;
         renderCityPage(cityId);
         let storeCity = document.getElementById("store-city");
-        storeVisitedBtn(storeCity, cityId);
+        storeVisitedBtn(storeCity, cityId);//then makes the visted boutton clickable
     });
 }
 
 visitedCities.addEventListener("click", () => {
-    renderVisitedCities();
+    renderVisitedCities(); //makes the visited cities in the nav work
 });
 
 function storeVisitedBtn(storeCity, cityId) {
