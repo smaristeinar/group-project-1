@@ -102,3 +102,19 @@ body {
 #store-city:hover{
     background-color: rgba(114, 221, 14, 0.925);
 }
+
+#deleteBtn {
+    cursor: pointer;
+    width: fit-content;
+    background-color: lightblue;
+    border: solid blue 2px;
+    padding: 5px;
+    font-size: 20px;
+    margin-left: 40px;
+    position: absolute;
+    bottom: 20px;
+}
+
+#deleteBtn:hover {
+    background-color: rgba(9, 53, 248, 0.349);
+}
