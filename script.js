@@ -1,3 +1,4 @@
+let key = "82e2f976b6758fe7f7e98cc5fe2e6a27";
 let land = {};
 let city = {};
 let cities = [];
@@ -14,7 +15,14 @@ let place = class{
         this.countryid = countryid;
         this.population = population;
     }
+    getCityName(id){
+        if (id == this.id) {
+            return this.stadname.toLowerCase()
+        }
+    }
 }
+
+
 
 let createPlaces = function(city){//creates a new object with all the stad data and puts them in cities
     for (let i = 0; i < city.length; i++) {
@@ -23,6 +31,8 @@ let createPlaces = function(city){//creates a new object with all the stad data 
         cities.push(item);
     }
 }
+
+
 
 fetch("json/land.json")
 .then((response) => response.json())// takin in the data from land.json and extracting the objects from it
@@ -40,7 +50,7 @@ function countryList(country) {
 
 fetch("json/stad.json")
 .then((response) => response.json())
-.then((data) => cityList(data)) //takin in the stad data from stad.json
+.then((data) => cityList(data)) //taking in the stad data from stad.json
 
 function cityList(city) {
     createPlaces(city); // creates objects
@@ -55,6 +65,7 @@ countryWrapper.addEventListener("click", (e) => {// makes every country clickabl
 let addClickableList = function(){// makes the cities clickable
     document.getElementById("ulid").addEventListener("click", (e) => {
         let cityId = e.target.id;
+        returnWeather(e.target.innerHTML.toLowerCase(),key);
         renderCityPage(cityId);
         let storeCity = document.getElementById("store-city");
         storeVisitedBtn(storeCity, cityId);//then makes the visted boutton clickable
@@ -70,6 +81,18 @@ function storeVisitedBtn(storeCity, cityId) {
         localStorage.setItem("cityID", cityId);
     });
 }
+
+function returnWeather(name, ak){
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${ak}`)
+    .then((response) => response.json())
+    .then(function(data){
+    let htlmstring = "wether: " + data.weather[0].main + " Temp: " + data.main.temp +"°";
+        document.getElementById("weather").insertAdjacentHTML("beforeend",htlmstring);
+        console.log(data);
+    })
+}
+
+
 
 // Rendering Pages
 
@@ -107,9 +130,10 @@ function renderCityPage(id) {
             cityWrapper.innerHTML = "";
             renderCityInfo += 
             `
-            <ul>
+            <ul id="cityUl">
             <h2>${cities[city].stadname}</h2>
             <li>Population: ${cities[city].population}</li>
+            <li id=weather></li>
             <button id="store-city" class='clickable-list' type="button">Visited</button>
             `;
         }
