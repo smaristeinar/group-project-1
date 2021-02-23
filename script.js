@@ -66,6 +66,7 @@ let addClickableList = function(){// makes the cities clickable
     document.getElementById("ulid").addEventListener("click", (e) => {
         let cityId = e.target.id;
         returnWeather(e.target.innerHTML.toLowerCase(),key);
+        returnWikipedia(e.target.innerHTML);
         renderCityPage(cityId);
         let storeCity = document.getElementById("store-city");
         storeVisitedBtn(storeCity, cityId);//then makes the visted boutton clickable
@@ -86,9 +87,20 @@ function returnWeather(name, ak){
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${ak}`)
     .then((response) => response.json())
     .then(function(data){
-    let htlmstring = "wether: " + data.weather[0].main + " Temp: " + data.main.temp +"°";
+    let htlmstring = "Wether: " + data.weather[0].main + " Temp: " + data.main.temp +"°";
         document.getElementById("weather").insertAdjacentHTML("beforeend",htlmstring);
         console.log(data);
+    })
+}
+function returnWikipedia(name){
+    fetch(`https://en.wikipedia.org/w/rest.php/v1/search/page?q=${name}&limit=1`)
+    .then((response) => response.json())
+    .then(function(data){
+    let htlmstring = `<img src="${data.pages[0].thumbnail.url}" alt="">`+ "<p>" + data.pages[0].excerpt + 
+    `<a href="https://en.wikipedia.org/wiki/${name} ">Read more...</a>`+ "</p>";
+
+    document.getElementById("wiki").insertAdjacentHTML("beforeend",htlmstring);
+    console.log(data);
     })
 }
 
@@ -134,6 +146,7 @@ function renderCityPage(id) {
             <h2>${cities[city].stadname}</h2>
             <li>Population: ${cities[city].population}</li>
             <li id=weather></li>
+            <li><div id="wiki"></div></li>
             <button id="store-city" class='clickable-list' type="button">Visited</button>
             `;
         }

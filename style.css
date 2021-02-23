@@ -12,6 +12,7 @@ body {
 
 #box-wrapper {
     width: 100%;
+    padding-left: 350px;
 }
 
 #navbar {
@@ -22,6 +23,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    position: fixed;
 }
 
 .clickable-list {
@@ -117,4 +119,18 @@ body {
 
 #deleteBtn:hover {
     background-color: rgba(9, 53, 248, 0.349);
+}
+
+#wiki{
+    
+    display: flex;
+}
+
+#wiki > p{
+    padding-left: 10px;
+    font-size: large;
+    max-width: 45%;
+    color: black;
+    font-style: italic;
+    font-weight: bold;
 }
