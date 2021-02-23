@@ -134,6 +134,12 @@ function renderVisitedCities() {
 
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
 
+    let deleteBtn = document.getElementById("deleteBtn");
+
+    deleteBtn.addEventListener("click", function() {
+        localStorage.clear();
+        renderVisitedCities();
+    });    
 }
 
 
