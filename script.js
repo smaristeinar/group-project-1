@@ -2,11 +2,13 @@ let key = "82e2f976b6758fe7f7e98cc5fe2e6a27";
 let land = {};
 let city = {};
 let cities = [];
+let citiesInLS = [];
 let root = document.getElementById("root");
 renderStartPage();
 let countryWrapper = document.getElementById("country-list");
 let cityWrapper = document.getElementById("city-wrapper");
 let visitedCities = document.getElementById("visited-cities");
+getCitiesInLS(citiesInLS);
 
 let place = class{
     constructor(id,stadname,countryid,population){
@@ -22,8 +24,6 @@ let place = class{
     }
 }
 
-
-
 let createPlaces = function(city){//creates a new object with all the stad data and puts them in cities
     for (let i = 0; i < city.length; i++) {
         let citys = city[i];
@@ -31,8 +31,6 @@ let createPlaces = function(city){//creates a new object with all the stad data 
         cities.push(item);
     }
 }
-
-
 
 fetch("json/land.json")
 .then((response) => response.json())// takin in the data from land.json and extracting the objects from it
@@ -79,8 +77,25 @@ visitedCities.addEventListener("click", () => {
 
 function storeVisitedBtn(storeCity, cityId) {
     storeCity.addEventListener("click", () => {
-        localStorage.setItem("cityID", cityId);
+        if(!citiesInLS || !citiesInLS.includes(cityId)) {
+            citiesInLS.push(cityId);
+            localStorage.setItem("citiesID", JSON.stringify(citiesInLS));
+        }
+        console.log(citiesInLS);
     });
+}
+
+function getCitiesInLS(citiesInLocalStorage) {
+    citiesInLocalStorage = JSON.parse(localStorage.getItem("citiesID"));
+    citiesInLS = citiesInLocalStorage;
+    if(!citiesInLS) {
+        citiesInLS = [];
+    }
+    // citiesInLS.push(citiesInLocalStorage);
+    // if(citiesInLS.includes(null)) {
+    //     citiesInLS.shift();
+    // }
+    console.log(citiesInLS);
 }
 
 function returnWeather(name, ak){
@@ -103,8 +118,6 @@ function returnWikipedia(name){
     console.log(data);
     })
 }
-
-
 
 // Rendering Pages
 
@@ -134,7 +147,6 @@ function renderCountryPage(id) {
     cityWrapper.insertAdjacentHTML("afterbegin", renderCities);
 }
 
-
 function renderCityPage(id) {
     let renderCityInfo = "";
     for(city in cities) {
@@ -156,19 +168,23 @@ function renderCityPage(id) {
 }
 
 function renderVisitedCities() {
-    let cityIdInLS = localStorage.getItem("cityID");
     cityWrapper.innerHTML = "";
     let displayVisitedCities = "<ul><h2>Visited Cities</h2>";
+    let totalPopulation = 0;
 
-    for(city in cities) {
-        if(cityIdInLS == cities[city].id) {
-            displayVisitedCities += `<li>${cities[city].stadname}</li>`
-        }
+    for(cityInLS in citiesInLS) {
+        let matchCityId = cities.find(city => city.id == citiesInLS[cityInLS]);
+        console.log(matchCityId);
+        totalPopulation += matchCityId.population;
+        console.log(totalPopulation);
+        displayVisitedCities += `<li>${matchCityId.stadname}</li>`;
     }
-    displayVisitedCities += "</ul>";
 
-    displayVisitedCities += "<div id='deleteBtn'>Delete visited cities</div>";
-
+    displayVisitedCities += 
+    `<li>Total Population: ${totalPopulation}</li>
+    </ul>
+    <div id='deleteBtn'>Delete visited cities</div>`
+    
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
 
     let deleteBtn = document.getElementById("deleteBtn");
@@ -176,7 +192,7 @@ function renderVisitedCities() {
     deleteBtn.addEventListener("click", function() {
         localStorage.clear();
         renderVisitedCities();
-    });    
+    });
 }
 
 
