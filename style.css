@@ -77,6 +77,10 @@ body {
     background-color: #d8d2d2;
 }
 
+#city-wrapper {
+    font-size: 40px;
+}
+
 #city-wrapper > ul {
     list-style-type: none;
     font-size: 40px;
@@ -113,7 +117,6 @@ body {
     padding: 5px;
     font-size: 20px;
     margin-left: 40px;
-    position: absolute;
     bottom: 20px;
 }
 

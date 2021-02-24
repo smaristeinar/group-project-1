@@ -129,7 +129,10 @@ function renderStartPage() {
         <h2 id="visited-cities" class='clickable-list'>Visited Cities</h2>
     </nav>
     <main id="box-wrapper">
-        <section id="city-wrapper"></section>
+        <section id="city-wrapper">
+            <h2>Welcome,</h2>
+            <p>Here you can find out more about the countries to the left</p>
+        </section>
     </main>
     `;
     root.insertAdjacentHTML("afterbegin", startPage);
@@ -196,7 +199,3 @@ function renderVisitedCities() {
         renderVisitedCities();
     });
 }
-
-
-
-
