@@ -102,7 +102,7 @@ function returnWeather(name, ak){
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${name}&units=metric&appid=${ak}`)
     .then((response) => response.json())
     .then(function(data){
-    let htlmstring = "Wether: " + data.weather[0].main + " Temp: " + data.main.temp +"°";
+    let htlmstring = "Weather: " + data.weather[0].main + " Temp: " + data.main.temp +"°";
         document.getElementById("weather").insertAdjacentHTML("beforeend",htlmstring);
         console.log(data);
     })
@@ -137,7 +137,7 @@ function renderStartPage() {
 
 function renderCountryPage(id) {
     cityWrapper.innerHTML = "";
-    let renderCities = `<ul id="ulid">`;
+    let renderCities = `<ul id="ulid"><h2>Cities</h2>`;
     for(city in cities) {
         if(cities[city].countryid == id) {
             renderCities +=  `<li id="${cities[city].id}" class='clickable-list'>${cities[city].stadname}</li>`;
@@ -181,14 +181,14 @@ function renderVisitedCities() {
     }
 
     displayVisitedCities += 
-    `<li>Total Population: ${totalPopulation}</li>
+    `
+    <li>Total Population: ${totalPopulation}</li>
     </ul>
-    <div id='deleteBtn'>Delete visited cities</div>`
-    
+    <div id='deleteBtn'>Delete visited cities</div>
+    `;
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
 
     let deleteBtn = document.getElementById("deleteBtn");
-
     deleteBtn.addEventListener("click", function() {
         localStorage.clear();
         renderVisitedCities();
