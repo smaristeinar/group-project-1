@@ -6,6 +6,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+li {
+    list-style: none;
+}
+
 #root {
     display: flex;
 }
@@ -70,9 +74,6 @@ body {
     background-color: rgba(9, 53, 248, 0.349);
 }
 
-/* messed up a commit so just pushing an extra one lol */
-
-
 .box-wrapper{
     background-color: #d8d2d2;
 }
@@ -84,10 +85,7 @@ body {
 #city-wrapper > ul {
     list-style-type: none;
     font-size: 40px;
-   
-    
 }
-
 
 #city-wrapper > ul > li {
     padding: 10px;
@@ -95,7 +93,6 @@ body {
 .clickable-list:hover {
     background-color: rgba(231, 231, 231, 0.589);
 }
-
 
 #store-city{
     padding: 10px;
@@ -116,7 +113,7 @@ body {
     border: solid blue 2px;
     padding: 5px;
     font-size: 20px;
-    margin-left: 40px;
+    margin-left: 6px;
     bottom: 20px;
 }
 
@@ -125,7 +122,6 @@ body {
 }
 
 #wiki{
-    
     display: flex;
 }
 
@@ -136,4 +132,13 @@ body {
     color: black;
     font-style: italic;
     font-weight: bold;
+}
+
+.visited-cities {
+    display: flex;
+    flex-direction: row;
+}
+
+.visited-cities div {
+    margin-left: 100px;
 }

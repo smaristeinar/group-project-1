@@ -172,7 +172,7 @@ function renderCityPage(id) {
 
 function renderVisitedCities() {
     cityWrapper.innerHTML = "";
-    let displayVisitedCities = "<ul><h2>Visited Cities</h2>";
+    let displayVisitedCities = "<h2>Visited Cities</h2><div class='visited-cities'><ul>";
     let totalPopulation = 0;
 
     for(cityInLS in citiesInLS) {
@@ -185,9 +185,12 @@ function renderVisitedCities() {
 
     displayVisitedCities += 
     `
-    <li>Total Population: ${totalPopulation}</li>
     </ul>
-    <div id='deleteBtn'>Delete visited cities</div>
+    <div>
+        <p>Total Population: ${totalPopulation}</p>
+        <div id='deleteBtn'>Delete visited cities</div>
+    </div>
+    </div>
     `;
 
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
