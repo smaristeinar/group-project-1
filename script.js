@@ -164,10 +164,19 @@ function renderCityPage(id) {
             <li><div id="wiki"></div></li>
             <button id="store-city" class='clickable-list' type="button">Visited</button>
             `;
+
         }
     }
     renderCityInfo += "</ul>";
     cityWrapper.insertAdjacentHTML("afterbegin", renderCityInfo);
+    for (let i = 0; i < citiesInLS.length; i++) {
+        if (citiesInLS[i] == id) {
+            console.log(citiesInLS[i]);
+            document.getElementById("store-city").style.backgroundColor = "red";
+            console.log("allready visited"); 
+        }
+         
+     }
 }
 
 function renderVisitedCities() {
