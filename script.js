@@ -81,6 +81,7 @@ function storeVisitedBtn(storeCity, cityId) {
             citiesInLS.push(cityId);
             localStorage.setItem("citiesID", JSON.stringify(citiesInLS));
         }
+        checkIfVisited(cityId);
         console.log(citiesInLS);
     });
 }
@@ -117,6 +118,17 @@ function returnWikipedia(name){
     document.getElementById("wiki").insertAdjacentHTML("beforeend",htlmstring);
     console.log(data);
     })
+}
+
+let checkIfVisited = function(id){
+    for (let i = 0; i < citiesInLS.length; i++) {
+        if (citiesInLS[i] == id) {
+            let button = document.getElementById("store-city");
+            button.style.backgroundColor = "red";
+            button.style.pointerEvents = "none";
+        }
+         
+     }
 }
 
 // Rendering Pages
@@ -169,14 +181,7 @@ function renderCityPage(id) {
     }
     renderCityInfo += "</ul>";
     cityWrapper.insertAdjacentHTML("afterbegin", renderCityInfo);
-    for (let i = 0; i < citiesInLS.length; i++) {
-        if (citiesInLS[i] == id) {
-            console.log(citiesInLS[i]);
-            document.getElementById("store-city").style.backgroundColor = "red";
-            console.log("allready visited"); 
-        }
-         
-     }
+    checkIfVisited(id);
 }
 
 function renderVisitedCities() {
