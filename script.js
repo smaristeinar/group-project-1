@@ -191,6 +191,7 @@ function renderVisitedCities() {
     let deleteBtn = document.getElementById("deleteBtn");
     deleteBtn.addEventListener("click", function() {
         localStorage.clear();
+        citiesInLS =[];
         renderVisitedCities();
     });
 }
