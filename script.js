@@ -39,7 +39,7 @@ fetch("json/land.json")
 function countryList(country) {
     land = country;
     let renderCountries = "<ul><h2>Countries</h2>" // adding a header
-    for(i in land) { // creating htlm for every land 
+    for(i in land) { // creating html for every land 
         renderCountries += `<li id="${land[i].id}" class='clickable-list'>${land[i].countryname}</li>`;
     }
     renderCountries += "</ul>";
@@ -52,7 +52,6 @@ fetch("json/stad.json")
 
 function cityList(city) {
     createPlaces(city); // creates objects
-    console.log(cities);
 }
 
 countryWrapper.addEventListener("click", (e) => {// makes every country clickable and returns the id to renderCountryPage
@@ -75,6 +74,7 @@ visitedCities.addEventListener("click", () => {
     renderVisitedCities(); //makes the visited cities in the nav work
 });
 
+// function that stores the objects id in local storage and in citiesInLS array
 function storeVisitedBtn(storeCity, cityId) {
     storeCity.addEventListener("click", () => {
         if(!citiesInLS || !citiesInLS.includes(cityId)) {
@@ -82,21 +82,16 @@ function storeVisitedBtn(storeCity, cityId) {
             localStorage.setItem("citiesID", JSON.stringify(citiesInLS));
         }
         checkIfVisited(cityId);
-        console.log(citiesInLS);
     });
 }
 
+// function that gets the city id from local storage and stores it in citiesInLS array
 function getCitiesInLS(citiesInLocalStorage) {
     citiesInLocalStorage = JSON.parse(localStorage.getItem("citiesID"));
     citiesInLS = citiesInLocalStorage;
-    if(!citiesInLS) {
-        citiesInLS = [];
+    if(!citiesInLS) { // if the website is reloaded the array becomes null if it's an empty array,
+        citiesInLS = []; // so we declare it back as an array
     }
-    // citiesInLS.push(citiesInLocalStorage);
-    // if(citiesInLS.includes(null)) {
-    //     citiesInLS.shift();
-    // }
-    console.log(citiesInLS);
 }
 
 function returnWeather(name, ak){
@@ -105,7 +100,6 @@ function returnWeather(name, ak){
     .then(function(data){
     let htlmstring = "Weather: " + data.weather[0].main + " Temp: " + data.main.temp +"°";
         document.getElementById("weather").insertAdjacentHTML("beforeend",htlmstring);
-        console.log(data);
     })
 }
 function returnWikipedia(name){
@@ -116,10 +110,10 @@ function returnWikipedia(name){
     `<a href="https://en.wikipedia.org/wiki/${name} ">Read more...</a>`+ "</p>";
 
     document.getElementById("wiki").insertAdjacentHTML("beforeend",htlmstring);
-    console.log(data);
     })
 }
 
+// function that checks if the id matches the value in citiesInLS array then changes the button color and pointer
 let checkIfVisited = function(id){
     for (let i = 0; i < citiesInLS.length; i++) {
         if (citiesInLS[i] == id) {
@@ -127,7 +121,6 @@ let checkIfVisited = function(id){
             button.style.backgroundColor = "red";
             button.style.pointerEvents = "none";
         }
-         
      }
 }
 
@@ -176,7 +169,6 @@ function renderCityPage(id) {
             <li><div id="wiki"></div></li>
             <button id="store-city" class='clickable-list' type="button">Visited</button>
             `;
-
         }
     }
     renderCityInfo += "</ul>";
@@ -191,9 +183,7 @@ function renderVisitedCities() {
 
     for(cityInLS in citiesInLS) {
         let matchCityId = cities.find(city => city.id == citiesInLS[cityInLS]);
-        console.log(matchCityId);
         totalPopulation += matchCityId.population;
-        console.log(totalPopulation);
         displayVisitedCities += `<li>${matchCityId.stadname}</li>`;
     }
 
