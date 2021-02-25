@@ -129,7 +129,10 @@ function renderStartPage() {
         <h2 id="visited-cities" class='clickable-list'>Visited Cities</h2>
     </nav>
     <main id="box-wrapper">
-        <section id="city-wrapper"></section>
+        <section id="city-wrapper">
+            <h2>Welcome,</h2>
+            <p>Here you can find out more about the countries to the left</p>
+        </section>
     </main>
     `;
     root.insertAdjacentHTML("afterbegin", startPage);
@@ -169,7 +172,7 @@ function renderCityPage(id) {
 
 function renderVisitedCities() {
     cityWrapper.innerHTML = "";
-    let displayVisitedCities = "<ul><h2>Visited Cities</h2>";
+    let displayVisitedCities = "<h2>Visited Cities</h2><div class='visited-cities'><ul>";
     let totalPopulation = 0;
 
     for(cityInLS in citiesInLS) {
@@ -182,20 +185,20 @@ function renderVisitedCities() {
 
     displayVisitedCities += 
     `
-    <li>Total Population: ${totalPopulation}</li>
     </ul>
-    <div id='deleteBtn'>Delete visited cities</div>
+    <div>
+        <p>Total Population: ${totalPopulation}</p>
+        <div id='deleteBtn'>Delete visited cities</div>
+    </div>
+    </div>
     `;
+
     cityWrapper.insertAdjacentHTML("beforeend", displayVisitedCities);
 
     let deleteBtn = document.getElementById("deleteBtn");
     deleteBtn.addEventListener("click", function() {
         localStorage.clear();
-        citiesInLS =[];
+        citiesInLS = [];
         renderVisitedCities();
     });
 }
-
-
-
-
